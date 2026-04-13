@@ -1,0 +1,429 @@
+fileFormatVersion: 2
+guid: be0655daf0c18264583d25146f058531
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -552605475447951312
+    second: "Elev\u0103 la examen stilizat South Park_0"
+  - first:
+      213: 82246769676610594
+    second: "Elev\u0103 la examen stilizat South Park_1"
+  - first:
+      213: -1944544827222166407
+    second: "Elev\u0103 la examen stilizat South Park_2"
+  - first:
+      213: 6461367946020203908
+    second: "Elev\u0103 la examen stilizat South Park_3"
+  - first:
+      213: 1310823124147149661
+    second: "Elev\u0103 la examen stilizat South Park_4"
+  - first:
+      213: -4025014352357602227
+    second: "Elev\u0103 la examen stilizat South Park_5"
+  - first:
+      213: 4255770842761055047
+    second: "Elev\u0103 la examen stilizat South Park_6"
+  - first:
+      213: -704750507012642825
+    second: "Elev\u0103 la examen stilizat South Park_7"
+  - first:
+      213: -256800517604653043
+    second: "Elev\u0103 la examen stilizat South Park_8"
+  - first:
+      213: -6461223480172918677
+    second: "Elev\u0103 la examen stilizat South Park_9"
+  - first:
+      213: 2244389063470337235
+    second: "Elev\u0103 la examen stilizat South Park_10"
+  - first:
+      213: -9154610027503814670
+    second: "Elev\u0103 la examen stilizat South Park_11"
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Elev\u0103 la examen stilizat South Park_0"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1526
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0303df67f30c458f0800000000000000
+      internalID: -552605475447951312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Elev\u0103 la examen stilizat South Park_1"
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 992
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22c6f725003342100800000000000000
+      internalID: 82246769676610594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Elev\u0103 la examen stilizat South Park_2"
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 994
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 974799348c69305e0800000000000000
+      internalID: -1944544827222166407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Elev\u0103 la examen stilizat South Park_3"
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 983
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48d21a1c9e36ba950800000000000000
+      internalID: 6461367946020203908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Elev\u0103 la examen stilizat South Park_4"
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 974
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5b9826bfaaf03210800000000000000
+      internalID: 1310823124147149661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Elev\u0103 la examen stilizat South Park_5"
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 963
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4c40ef95c64428c0800000000000000
+      internalID: -4025014352357602227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Elev\u0103 la examen stilizat South Park_6"
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 807
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74bcc3098098f0b30800000000000000
+      internalID: 4255770842761055047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Elev\u0103 la examen stilizat South Park_7"
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 200
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f72c36d5293836f0800000000000000
+      internalID: -704750507012642825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Elev\u0103 la examen stilizat South Park_8"
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 166
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d08c9023a49af6cf0800000000000000
+      internalID: -256800517604653043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Elev\u0103 la examen stilizat South Park_9"
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 40
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6841e15a7f1556a0800000000000000
+      internalID: -6461223480172918677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Elev\u0103 la examen stilizat South Park_10"
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 24
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dccbe146fba52f10800000000000000
+      internalID: 2244389063470337235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Elev\u0103 la examen stilizat South Park_11"
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 0
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f7f765eeaa44f080800000000000000
+      internalID: -9154610027503814670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      "Elev\u0103 la examen stilizat South Park_0": -552605475447951312
+      "Elev\u0103 la examen stilizat South Park_1": 82246769676610594
+      "Elev\u0103 la examen stilizat South Park_10": 2244389063470337235
+      "Elev\u0103 la examen stilizat South Park_11": -9154610027503814670
+      "Elev\u0103 la examen stilizat South Park_2": -1944544827222166407
+      "Elev\u0103 la examen stilizat South Park_3": 6461367946020203908
+      "Elev\u0103 la examen stilizat South Park_4": 1310823124147149661
+      "Elev\u0103 la examen stilizat South Park_5": -4025014352357602227
+      "Elev\u0103 la examen stilizat South Park_6": 4255770842761055047
+      "Elev\u0103 la examen stilizat South Park_7": -704750507012642825
+      "Elev\u0103 la examen stilizat South Park_8": -256800517604653043
+      "Elev\u0103 la examen stilizat South Park_9": -6461223480172918677
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
