@@ -7,7 +7,7 @@ public class DotNode : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler
     public int pairIndex;
     public Color color;
     public DotNode partner;
-    public WireMinigameManager manager;
+    public MinigameManager manager;
 
     public bool isConnected { get; private set; }
     private GameObject connectedLine;
