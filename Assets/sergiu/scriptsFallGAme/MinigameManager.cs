@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 using System;
 using System.Collections;
 
@@ -9,14 +9,14 @@ public class MinigameManager : MonoBehaviour
 
     [Header("UI References")]
     public GameObject minigamePanel;
-    public Text progressText;       // ex. "5/10"
-    public Text livesText;          // ex. "♥ ♥ ♥"
-    public Text keyHintText;        // ex. "Apasă W!"
-    public Text feedbackText;       // "✓" sau "✗"
-    public Text resultText;
+    public TMP_Text progressText;
+    public TMP_Text livesText;
+    public TMP_Text keyHintText;
+    public TMP_Text feedbackText;
+    public TMP_Text resultText;
 
     [Header("Prefabs")]
-    public GameObject fallingObjectPrefab;  // Prefab cu FallingObject.cs
+    public GameObject fallingObjectPrefab;
 
     [Header("Settings")]
     public MinigameType minigameType = MinigameType.Mash;
@@ -77,8 +77,6 @@ public class MinigameManager : MonoBehaviour
 
     void ClosePanel() => minigamePanel.SetActive(false);
 
-    // ── Metode apelate din MashMinigame ──────────────────────────
-
     public void UpdateProgress(int current, int total)
     {
         if (progressText != null)
@@ -123,7 +121,7 @@ public class MinigameManager : MonoBehaviour
         return GameObject.Instantiate(fallingObjectPrefab, position, Quaternion.identity);
     }
 
-    public Coroutine StartCoroutine(IEnumerator routine)
+    public new Coroutine StartCoroutine(IEnumerator routine)
     {
         return (this as MonoBehaviour).StartCoroutine(routine);
     }
