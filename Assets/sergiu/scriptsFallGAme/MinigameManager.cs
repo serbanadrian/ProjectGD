@@ -20,28 +20,34 @@ public class MinigameManager : MonoBehaviour
 
     [Header("Settings")]
     public MinigameType minigameType = MinigameType.Mash;
-
-    [Header("Camera Settings")]
-    public Vector3 minigameAreaCenter = new Vector3(1000f, 0f, -10f);
-    public Vector3 mainScenePosition  = new Vector3(0f,    0f, -10f);
+    public string nextScene = ""; // Scena urmatoare dupa minigame
+    public int scoreOnSuccess = 100;
 
     private IMinigame currentMinigame;
     private bool isPlaying = false;
     private PlayerMovement playerMovement;
-    private Camera mainCamera;
 
     void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
-        mainCamera = Camera.main;
         playerMovement = FindFirstObjectByType<PlayerMovement>();
         minigamePanel.SetActive(false);
+
+        // Porneste minigame-ul automat la intrarea in scena
+        StartMinigame(OnMinigameComplete);
+    }
+
+    void OnMinigameComplete(bool success)
+    {
+        if (success)
+            GameManager.Instance.AddScore(scoreOnSuccess);
+        else
+            GameManager.Instance.LoseLife();
     }
 
     public void StartMinigame(Action<bool> onComplete)
@@ -51,11 +57,8 @@ public class MinigameManager : MonoBehaviour
         playerMovement = FindFirstObjectByType<PlayerMovement>();
         isPlaying = true;
 
-        // Muta camera la zona minigame
-        mainCamera.transform.position = minigameAreaCenter;
-
         minigamePanel.SetActive(true);
-        resultText.text  = "";
+        resultText.text   = "";
         feedbackText.text = "";
         keyHintText.text  = "";
 
@@ -84,19 +87,21 @@ public class MinigameManager : MonoBehaviour
 
         if (playerMovement != null) playerMovement.enabled = true;
 
-        Invoke(nameof(ReturnToMainScene), 2f);
+        // Merge la urmatoarea scena dupa 2 secunde
+        Invoke(nameof(GoToNextScene), 2f);
     }
 
-    void ReturnToMainScene()
+    void GoToNextScene()
     {
-        // Inchide panelul
         minigamePanel.SetActive(false);
 
-        // Muta camera inapoi
-        mainCamera.transform.position = mainScenePosition;
+        if (!string.IsNullOrEmpty(nextScene))
+            GameManager.Instance.GoToScene(nextScene);
+        else
+            GameManager.Instance.GoToNextScene();
     }
 
-    // ── UI Methods ────────────────────────────────────────────────
+    public void SetMinigameType(MinigameType type) => minigameType = type;
 
     public void UpdateProgress(int current, int total)
     {
