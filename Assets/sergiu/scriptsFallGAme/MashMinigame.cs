@@ -25,10 +25,10 @@ public class MashMinigame : IMinigame
     // Pozitii de spawn (sus, pe coloane diferite)
     private Vector3[] spawnPositions = new Vector3[]
     {
-        new Vector3(-3f, 6f, 0f),
-        new Vector3(-1f, 6f, 0f),
-        new Vector3( 1f, 6f, 0f),
-        new Vector3( 3f, 6f, 0f),
+        new Vector3(997f, 6f, 0f),
+        new Vector3(997f, 6f, 0f),
+        new Vector3( 997f, 6f, 0f),
+        new Vector3( 997f, 6f, 0f),
     };
 
     // Mapare tip → coloana de spawn

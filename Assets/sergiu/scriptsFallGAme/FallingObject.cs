@@ -12,12 +12,12 @@ public class FallingObject : MonoBehaviour
 
     void Update()
     {
-        transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+       transform.position += Vector3.down * fallSpeed * Time.deltaTime;
 
-        if (!hasBeenHandled && transform.position.y <= bottomY)
+    if (!hasBeenHandled && transform.position.y <= -5f)
         {
-            hasBeenHandled = true;
-            MashMinigame.Instance?.OnObjectMissed(this);
+        hasBeenHandled = true;
+        MashMinigame.Instance?.OnObjectMissed(this);
         }
     }
 

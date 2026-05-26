@@ -21,18 +21,25 @@ public class MinigameManager : MonoBehaviour
     [Header("Settings")]
     public MinigameType minigameType = MinigameType.Mash;
 
+    [Header("Camera Settings")]
+    public Vector3 minigameAreaCenter = new Vector3(1000f, 0f, -10f);
+    public Vector3 mainScenePosition  = new Vector3(0f,    0f, -10f);
+
     private IMinigame currentMinigame;
     private bool isPlaying = false;
     private PlayerMovement playerMovement;
+    private Camera mainCamera;
 
     void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()
     {
+        mainCamera = Camera.main;
         playerMovement = FindFirstObjectByType<PlayerMovement>();
         minigamePanel.SetActive(false);
     }
@@ -41,11 +48,16 @@ public class MinigameManager : MonoBehaviour
     {
         if (isPlaying) return;
 
+        playerMovement = FindFirstObjectByType<PlayerMovement>();
         isPlaying = true;
+
+        // Muta camera la zona minigame
+        mainCamera.transform.position = minigameAreaCenter;
+
         minigamePanel.SetActive(true);
-        resultText.text = "";
+        resultText.text  = "";
         feedbackText.text = "";
-        keyHintText.text = "";
+        keyHintText.text  = "";
 
         if (playerMovement != null) playerMovement.enabled = false;
 
@@ -67,15 +79,24 @@ public class MinigameManager : MonoBehaviour
     {
         isPlaying = false;
         keyHintText.text = "";
-        resultText.text = success ? "SUCCES!" : "ESUAT!";
+        resultText.text  = success ? "SUCCES!" : "ESUAT!";
         resultText.color = success ? Color.green : Color.red;
 
         if (playerMovement != null) playerMovement.enabled = true;
 
-        Invoke(nameof(ClosePanel), 2f);
+        Invoke(nameof(ReturnToMainScene), 2f);
     }
 
-    void ClosePanel() => minigamePanel.SetActive(false);
+    void ReturnToMainScene()
+    {
+        // Inchide panelul
+        minigamePanel.SetActive(false);
+
+        // Muta camera inapoi
+        mainCamera.transform.position = mainScenePosition;
+    }
+
+    // ── UI Methods ────────────────────────────────────────────────
 
     public void UpdateProgress(int current, int total)
     {
@@ -97,7 +118,7 @@ public class MinigameManager : MonoBehaviour
     public void ShowKeyHint(string key)
     {
         if (keyHintText != null)
-            keyHintText.text = $"Apasă  [ {key} ]";
+            keyHintText.text = $"Apasă [ {key} ]";
     }
 
     public void ShowFeedback(bool correct)
@@ -109,7 +130,7 @@ public class MinigameManager : MonoBehaviour
     {
         if (feedbackText != null)
         {
-            feedbackText.text = correct ? "✓" : "✗";
+            feedbackText.text  = correct ? "✓" : "✗";
             feedbackText.color = correct ? Color.green : Color.red;
             yield return new WaitForSeconds(0.3f);
             feedbackText.text = "";
@@ -118,7 +139,7 @@ public class MinigameManager : MonoBehaviour
 
     public GameObject SpawnFallingObject(Vector3 position)
     {
-        return GameObject.Instantiate(fallingObjectPrefab, position, Quaternion.identity);
+        return Instantiate(fallingObjectPrefab, position, Quaternion.identity);
     }
 
     public new Coroutine StartCoroutine(IEnumerator routine)
