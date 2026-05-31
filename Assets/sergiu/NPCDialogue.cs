@@ -31,6 +31,17 @@ public class NPCDialogue : MonoBehaviour
 
         if (dialogueBox != null)    dialogueBox.SetActive(false);
         if (pressEPrompt != null)   pressEPrompt.SetActive(false);
+         if (player == null || hasTriggered) return;
+
+    float distance = Vector2.Distance(transform.position, player.position);
+    Debug.Log($"Distanta fata de NPC: {distance}"); // ← adauga asta
+
+    if (distance <= triggerRadius && !isRunning)
+    {
+        isRunning = true;
+        StartCoroutine(RunDialogue());
+        
+    }
     }
 
     void Update()
@@ -47,38 +58,47 @@ public class NPCDialogue : MonoBehaviour
     }
 
     IEnumerator RunDialogue()
+{
+    // Opreste playerul
+    PlayerMovement pm = FindFirstObjectByType<PlayerMovement>();
+    if (pm != null) pm.enabled = false;
+
+    if (dialogueBox == null) { Debug.LogError("DialogueBox e null!"); yield break; }
+    if (dialogueText == null) { Debug.LogError("DialogueText e null!"); yield break; }
+
+    dialogueBox.SetActive(true);
+
+    // Ruleaza fiecare linie
+    foreach (DialogueLine line in lines)
     {
-        // Opreste playerul
-        PlayerMovement pm = FindFirstObjectByType<PlayerMovement>();
-        if (pm != null) pm.enabled = false;
+        dialogueText.text = line.text;
 
-        dialogueBox.SetActive(true);
+        if (line.isLastLine && pressEPrompt != null)
+            pressEPrompt.SetActive(true);
 
-        // Ruleaza fiecare linie
-        foreach (DialogueLine line in lines)
-        {
-            dialogueText.text = line.text;
-
-            // Daca e ultima linie, arata promptul de E
-            if (line.isLastLine && pressEPrompt != null)
-                pressEPrompt.SetActive(true);
-
-            yield return new WaitForSeconds(line.displayDuration);
-        }
-
-        // Asteapta E dupa ultima linie
-        yield return new WaitUntil(() =>
-            Keyboard.current.eKey.wasPressedThisFrame);
-
-        hasTriggered = true;
-        dialogueBox.SetActive(false);
-        if (pressEPrompt != null) pressEPrompt.SetActive(false);
-
-        // Reactiveaza playerul si merge la minigame
-        if (pm != null) pm.enabled = true;
-        GameManager.Instance.GoToScene(minigameScene);
+        yield return new WaitForSeconds(line.displayDuration);
     }
 
+    // Asteapta E - verificat in fiecare frame
+    bool ePressed = false;
+    while (!ePressed)
+    {
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+            ePressed = true;
+        yield return null; // asteapta urmatorul frame
+    }
+
+    hasTriggered = true;
+    dialogueBox.SetActive(false);
+    if (pressEPrompt != null) pressEPrompt.SetActive(false);
+
+    if (pm != null) pm.enabled = true;
+
+    if (GameManager.Instance != null)
+        GameManager.Instance.GoToScene(minigameScene);
+    else
+        Debug.LogError("GameManager nu exista in scena!");
+}
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
