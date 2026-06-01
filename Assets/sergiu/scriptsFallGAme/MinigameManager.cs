@@ -11,16 +11,18 @@ public class MinigameManager : MonoBehaviour
     public GameObject minigamePanel;
     public TMP_Text progressText;
     public TMP_Text livesText;
-    public TMP_Text keyHintText;
     public TMP_Text feedbackText;
     public TMP_Text resultText;
 
-    [Header("Prefabs")]
-    public GameObject fallingObjectPrefab;
+    [Header("Falling Object Prefabs")]
+    public GameObject prefabW;   // imaginea pentru W
+    public GameObject prefabA;   // imaginea pentru A
+    public GameObject prefabS;   // imaginea pentru S
+    public GameObject prefabD;   // imaginea pentru D
 
     [Header("Settings")]
     public MinigameType minigameType = MinigameType.Mash;
-    public string nextScene = ""; // Scena urmatoare dupa minigame
+    public string nextScene = "Scene2";
     public int scoreOnSuccess = 100;
 
     private IMinigame currentMinigame;
@@ -37,8 +39,6 @@ public class MinigameManager : MonoBehaviour
     {
         playerMovement = FindFirstObjectByType<PlayerMovement>();
         minigamePanel.SetActive(false);
-
-        // Porneste minigame-ul automat la intrarea in scena
         StartMinigame(OnMinigameComplete);
     }
 
@@ -60,7 +60,6 @@ public class MinigameManager : MonoBehaviour
         minigamePanel.SetActive(true);
         resultText.text   = "";
         feedbackText.text = "";
-        keyHintText.text  = "";
 
         if (playerMovement != null) playerMovement.enabled = false;
 
@@ -81,13 +80,11 @@ public class MinigameManager : MonoBehaviour
     void OnMinigameFinished(bool success)
     {
         isPlaying = false;
-        keyHintText.text = "";
         resultText.text  = success ? "SUCCES!" : "ESUAT!";
         resultText.color = success ? Color.green : Color.red;
 
         if (playerMovement != null) playerMovement.enabled = true;
 
-        // Merge la urmatoarea scena dupa 2 secunde
         Invoke(nameof(GoToNextScene), 2f);
     }
 
@@ -95,13 +92,13 @@ public class MinigameManager : MonoBehaviour
     {
         minigamePanel.SetActive(false);
 
-        if (!string.IsNullOrEmpty(nextScene))
+        if (GameManager.Instance != null)
             GameManager.Instance.GoToScene(nextScene);
         else
-            GameManager.Instance.GoToNextScene();
+            UnityEngine.SceneManagement.SceneManager.LoadScene(nextScene);
     }
 
-    public void SetMinigameType(MinigameType type) => minigameType = type;
+    // ── UI Methods ────────────────────────────────────────
 
     public void UpdateProgress(int current, int total)
     {
@@ -120,12 +117,6 @@ public class MinigameManager : MonoBehaviour
         }
     }
 
-    public void ShowKeyHint(string key)
-    {
-        if (keyHintText != null)
-            keyHintText.text = $"Apasă [ {key} ]";
-    }
-
     public void ShowFeedback(bool correct)
     {
         StartCoroutine(FeedbackFlash(correct));
@@ -142,10 +133,28 @@ public class MinigameManager : MonoBehaviour
         }
     }
 
-    public GameObject SpawnFallingObject(Vector3 position)
+    // Spawneaza prefab-ul corespunzator tipului
+    public GameObject SpawnFallingObject(FallingObject.ObjectType type, Vector3 position)
     {
-        return Instantiate(fallingObjectPrefab, position, Quaternion.identity);
+        GameObject prefab = type switch
+        {
+            FallingObject.ObjectType.W => prefabW,
+            FallingObject.ObjectType.A => prefabA,
+            FallingObject.ObjectType.S => prefabS,
+            FallingObject.ObjectType.D => prefabD,
+            _ => prefabW
+        };
+
+        if (prefab == null)
+        {
+            Debug.LogError($"Prefab pentru {type} nu e asignat in Inspector!");
+            return null;
+        }
+
+        return Instantiate(prefab, position, Quaternion.identity);
     }
+
+    public void SetMinigameType(MinigameType type) => minigameType = type;
 
     public new Coroutine StartCoroutine(IEnumerator routine)
     {

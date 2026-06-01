@@ -12,34 +12,20 @@ public class MashMinigame : IMinigame
     private Action<bool> onComplete;
 
     // Settings
-    private int totalObjects = 10;      // Cate obiecte trebuie sa prinzi
+    private int totalObjects = 10;
     private int livesMax = 3;
-    private float spawnInterval = 1.5f; // Interval intre obiecte
+    private float spawnInterval = 2f;
+
+    // Limite spawn pe X (aleator intre acestea)
+    private float minX = -3f;
+    private float maxX = 3f;
+    private float spawnY = 6f;
 
     // State
     private int livesRemaining;
     private int caughtCount = 0;
     private bool isRunning = false;
     private FallingObject currentObject = null;
-
-    // Pozitii de spawn (sus, pe coloane diferite)
-    private Vector3[] spawnPositions = new Vector3[]
-    {
-        new Vector3(997f, 6f, 0f),
-        new Vector3(997f, 6f, 0f),
-        new Vector3( 997f, 6f, 0f),
-        new Vector3( 997f, 6f, 0f),
-    };
-
-    // Mapare tip → coloana de spawn
-    private Dictionary<FallingObject.ObjectType, int> typeToColumn =
-        new Dictionary<FallingObject.ObjectType, int>
-    {
-        { FallingObject.ObjectType.A, 0 },
-        { FallingObject.ObjectType.S, 1 },
-        { FallingObject.ObjectType.W, 2 },
-        { FallingObject.ObjectType.D, 3 },
-    };
 
     public MashMinigame(MinigameManager manager)
     {
@@ -63,7 +49,6 @@ public class MashMinigame : IMinigame
     public void UpdateMinigame()
     {
         if (!isRunning || currentObject == null) return;
-
         CheckInput();
     }
 
@@ -80,7 +65,6 @@ public class MashMinigame : IMinigame
 
         if (pressed == currentObject.objectType)
         {
-            // Corect!
             currentObject.HandleCorrect();
             currentObject = null;
             caughtCount++;
@@ -119,12 +103,10 @@ public class MashMinigame : IMinigame
 
     IEnumerator SpawnLoop()
     {
-        // Mic delay la inceput
         yield return new WaitForSeconds(0.5f);
 
         while (isRunning && caughtCount < totalObjects)
         {
-            // Asteapta sa nu fie un obiect activ
             yield return new WaitUntil(() => currentObject == null || !isRunning);
 
             if (!isRunning) yield break;
@@ -139,21 +121,19 @@ public class MashMinigame : IMinigame
 
     void SpawnObject()
     {
-        // Alege tip random
+        // Tip aleator
         var types = (FallingObject.ObjectType[])Enum.GetValues(typeof(FallingObject.ObjectType));
         FallingObject.ObjectType randomType = types[UnityEngine.Random.Range(0, types.Length)];
 
-        // Spawn pe coloana corespunzatoare
-        Vector3 spawnPos = spawnPositions[typeToColumn[randomType]];
-        GameObject obj = manager.SpawnFallingObject(spawnPos);
+        // Pozitie X aleatoare
+        float randomX = UnityEngine.Random.Range(minX, maxX);
+        Vector3 spawnPos = new Vector3(randomX, spawnY, 0f);
 
+        // Spawneaza obiectul corespunzator tipului
+        GameObject obj = manager.SpawnFallingObject(randomType, spawnPos);
         FallingObject fo = obj.GetComponent<FallingObject>();
         fo.objectType = randomType;
-
         currentObject = fo;
-
-        // Arata hint pe UI
-        manager.ShowKeyHint(randomType.ToString());
     }
 
     public void EndMinigame(bool success)
@@ -161,7 +141,6 @@ public class MashMinigame : IMinigame
         isRunning = false;
         Instance = null;
 
-        // Distruge obiectul curent daca mai exista
         if (currentObject != null)
         {
             currentObject.HandleMissed();
