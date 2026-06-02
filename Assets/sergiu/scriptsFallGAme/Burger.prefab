@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2418680349530000952}
   - component: {fileID: 1235833835099471652}
+  - component: {fileID: 8722614166487493008}
   m_Layer: 0
   m_Name: Burger
   m_TagString: Untagged
@@ -91,3 +92,17 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &8722614166487493008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8628507555947757324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2630ab03cd2f17eb2b8e15bc9c0d6a47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FallingObject
+  objectType: 2
+  fallSpeed: 3
