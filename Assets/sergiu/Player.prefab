@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7823640122777250530}
   - component: {fileID: 4230887598548410703}
   - component: {fileID: 4164172962761623134}
-  - component: {fileID: 3966273669230168148}
+  - component: {fileID: 8746916153104303767}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -157,7 +157,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.106768176, y: 0.32978058}
   m_Radius: 3.056301
---- !u!114 &3966273669230168148
+--- !u!114 &8746916153104303767
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -166,9 +166,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4236355849689945731}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4ce610ef3e70b53e92b1af707109280, type: 3}
+  m_Script: {fileID: 11500000, guid: da62675436a421f44922f00b6665914e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  m_EditorClassIdentifier: Assembly-CSharp::SergiuPlayerMovement
   moveSpeed: 5
   acceleration: 10
   deceleration: 10
