@@ -22,7 +22,7 @@ public class MinigameManager : MonoBehaviour
 
     [Header("Settings")]
     public MinigameType minigameType = MinigameType.Mash;
-    public string nextScene = "Scene2";
+    public string nextScene = "test";
     public int scoreOnSuccess = 100;
 
     private IMinigame currentMinigame;

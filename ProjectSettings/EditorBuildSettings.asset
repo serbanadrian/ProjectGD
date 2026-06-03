@@ -12,7 +12,13 @@ EditorBuildSettings:
     path: Assets/sergiu/Room1.unity
     guid: 6189b6ecf7202480ebb6fb23bdb60614
   - enabled: 1
-    path: Assets/sergiu/Scene2.unity
-    guid: 4c8c351a65023036482811da6a69a9be
+    path: Assets/sergiu/Minigame1.unity
+    guid: 2ec4df2130bf26be684dc0a2a10cffd6
+  - enabled: 1
+    path: Assets/Scenes/Test.unity
+    guid: b533b7e531715c64081468386cc82896
+  - enabled: 1
+    path: Assets/Scenes/Final.unity
+    guid: 98a96d5f3fd0bc249b116451a7f64691
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
