@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "ProjectGD.slnx",
+    "dotnet.defaultSolution": "Escape from UPT.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
