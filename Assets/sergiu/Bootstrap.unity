@@ -744,7 +744,7 @@ MonoBehaviour:
   sceneOrder:
   - MainScene
   - Room1
-  - Minigame1
+  - Hol1
   - Room2
   - Minigame2
 --- !u!4 &1705808328

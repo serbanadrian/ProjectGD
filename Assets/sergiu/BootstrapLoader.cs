@@ -30,6 +30,6 @@ public class BootstrapLoader : MonoBehaviour
         if (!canPress) return;
 
         if (Keyboard.current.enterKey.wasPressedThisFrame)
-            SceneLoader.Instance.LoadScene(firstScene);
+            SceneLoader.Instance.LoadScene("Room1");
     }
 }

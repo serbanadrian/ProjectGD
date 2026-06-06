@@ -20,5 +20,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Final.unity
     guid: 98a96d5f3fd0bc249b116451a7f64691
+  - enabled: 1
+    path: Assets/Scenes/Hol1.unity
+    guid: 58a9c16cfe9659a419043bb24e7d754e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

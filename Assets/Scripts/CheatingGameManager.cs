@@ -166,8 +166,8 @@ public class CheatingGameManager : MonoBehaviour
 
         if (loadNextSceneWhenDone)
         {
-            int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(currentSceneIndex + 1);
+            //int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene("Hol2");
         }
     }
 

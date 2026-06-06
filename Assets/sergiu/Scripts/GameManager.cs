@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     {
         "MainScene",
         "Room1",
-        "Minigame1",
+        "Hol1",
         "Room2",
         "Minigame2"
     };

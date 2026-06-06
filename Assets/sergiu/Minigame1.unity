@@ -934,7 +934,7 @@ MonoBehaviour:
   prefabS: {fileID: 8628507555947757324, guid: b57fb70017557b866b865c90cc0f505a, type: 3}
   prefabD: {fileID: 7247860557322669044, guid: db034147be4b625c998a5d19e5f5627a, type: 3}
   minigameType: 0
-  nextScene: Scene2
+  nextScene: Hol3
   scoreOnSuccess: 100
 --- !u!4 &1793784101
 Transform:

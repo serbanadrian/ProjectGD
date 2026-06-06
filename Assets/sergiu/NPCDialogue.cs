@@ -15,7 +15,7 @@ public class NPCDialogue : MonoBehaviour
     public GameObject pressEPrompt;     // "Apasa E pentru a incepe"
 
     [Header("Next Scene")]
-    public string minigameScene = "Minigame1";
+    public string minigameScene = "Hol1";
 
     private Transform player;
     private bool hasTriggered = false;
