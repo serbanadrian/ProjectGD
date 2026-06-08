@@ -5,7 +5,7 @@ public class ChaseMinigame : IMinigame
 {
     public static ChaseMinigame Instance { get; private set; }
 
-    private ChaseMinigameManager manager;
+    private MinigameManager manager;
     private Action<bool> onComplete;
 
     private Transform chaser;
@@ -13,11 +13,10 @@ public class ChaseMinigame : IMinigame
 
     private float chaseSpeed = 3f;
     private float catchRadius = 0.5f;
-
     private bool isRunning = false;
     private bool caught = false;
 
-    public ChaseMinigame(ChaseMinigameManager manager)
+    public ChaseMinigame(MinigameManager manager)
     {
         this.manager = manager;
         Instance = this;
@@ -37,17 +36,15 @@ public class ChaseMinigame : IMinigame
     {
         if (!isRunning || caught) return;
 
-        // Urmareste playerul direct (homing)
         Vector3 direction = (player.position - chaser.position).normalized;
         chaser.position += direction * chaseSpeed * Time.deltaTime;
 
-        // Verifica distanta
         float distance = Vector2.Distance(chaser.position, player.position);
         if (distance <= catchRadius)
         {
             caught = true;
             isRunning = false;
-            EndMinigame(false); // mereu esuat — joc troll
+            EndMinigame(false);
         }
     }
 
@@ -55,6 +52,6 @@ public class ChaseMinigame : IMinigame
     {
         isRunning = false;
         Instance = null;
-        onComplete?.Invoke(false); // mereu false
+        onComplete?.Invoke(false);
     }
 }
