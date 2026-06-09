@@ -919,6 +919,8 @@ MonoBehaviour:
   introText: {fileID: 1328096922}
   jumpscarePanel: {fileID: 1098399301}
   jumpscareText: {fileID: 240889804}
+  chaseMusic: {fileID: 8300000, guid: 8e9ac72633d5790808752fb79618fa8c, type: 3}
+  caughtSound: {fileID: 8300000, guid: 21d531ad755c30194b1aca2a9cc615b6, type: 3}
   sleepSlider: {fileID: 0}
   sleepSliderFill: {fileID: 0}
   sleepOverlay: {fileID: 0}

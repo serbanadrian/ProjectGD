@@ -39,6 +39,10 @@ public class MinigameManager : MonoBehaviour
     public TMP_Text introText;
     public GameObject jumpscarePanel;
     public TMP_Text jumpscareText;
+    
+    [Header("Chase Audio")]
+public AudioClip chaseMusic;        // muzica de urmarire (loop)
+public AudioClip caughtSound;       // sunetul de prins
 
     [Header("StayAwake Settings")]
     public Slider sleepSlider;
@@ -251,6 +255,36 @@ IEnumerator FeedbackFlash(bool correct)
                 jumpscareText.text = message;
         }
     }
+    private AudioSource audioSource;
+
+public void PlayChaseMusic()
+{
+    if (audioSource == null)
+        audioSource = gameObject.AddComponent<AudioSource>();
+
+    if (chaseMusic != null)
+    {
+        audioSource.clip = chaseMusic;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+}
+
+public void PlayCaughtSound()
+{
+    if (audioSource == null)
+        audioSource = gameObject.AddComponent<AudioSource>();
+
+    // Opreste muzica de urmarire
+    audioSource.Stop();
+    audioSource.loop = false;
+
+    if (caughtSound != null)
+    {
+        audioSource.clip = caughtSound;
+        audioSource.Play();
+    }
+}
 
   public void UpdateTimer(float timeRemaining)
 {

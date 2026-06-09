@@ -48,21 +48,21 @@ public class ChaseMinigame : IMinigame
     }
 
     IEnumerator IntroSequence()
-    {
-        // Arata intro panel
-        manager.ShowIntro("Fugi de job!", introDuration);
+{
+    manager.ShowIntro("Fugi de job!", introDuration);
+    yield return new WaitForSeconds(introDuration);
 
-        yield return new WaitForSeconds(introDuration);
+    manager.chaser.SetActive(true);
 
-        // Ascunde intro, arata chaser, reactiveaza playerul
-        manager.chaser.SetActive(true);
+    var pm = GameObject.FindFirstObjectByType<PlayerMovement>();
+    if (pm != null) pm.enabled = true;
 
-        var pm = GameObject.FindFirstObjectByType<PlayerMovement>();
-        if (pm != null) pm.enabled = true;
+    // ← porneste muzica de urmarire
+    manager.PlayChaseMusic();
 
-        introFinished = true;
-        isRunning = true;
-    }
+    introFinished = true;
+    isRunning = true;
+}
 
     public void UpdateMinigame()
     {
@@ -88,32 +88,33 @@ public class ChaseMinigame : IMinigame
         }
     }
 
-    IEnumerator CaughtSequence()
+   IEnumerator CaughtSequence()
+{
+    // ← opreste muzica de urmarire, porneste sunetul de prins
+    manager.PlayCaughtSound();
+
+    yield return manager.StartCoroutine(CameraShake(0.5f, 0.3f));
+
+    manager.ShowJumpscare(
+        "Fie că fugi de job sau după un job\n" +
+        "răspunsul va fi același.\n\n" +
+        "Nu da vina pe AI că ești șomer.\n\n" +
+        "Ține minte:\n" +
+        "\"Un om fără pantaloni nu se teme\n" +
+        "de hoții de buzunare\""
+    );
+
+    bool pressed = false;
+    while (!pressed)
     {
-        // Camera shake
-        yield return manager.StartCoroutine(CameraShake(0.5f, 0.3f));
-
-        // Arata jumpscare
-        manager.ShowJumpscare(
-            "Fie că fugi de job sau după un job\n" +
-            "răspunsul va fi același.\n\n" +
-            "Nu da vina pe AI că ești șomer.\n\n" +
-            "Ține minte:\n" +
-            "\"Un om fără pantaloni nu se teme\n" +
-            "de hoții de buzunare\""
-        );
-
-        // Asteapta tasta
-        bool pressed = false;
-        while (!pressed)
-        {
-            if (UnityEngine.InputSystem.Keyboard.current.anyKey.wasPressedThisFrame)
-                pressed = true;
-            yield return null;
-        }
-
-        EndMinigame(false);
+        if (UnityEngine.InputSystem.Keyboard.current.anyKey.wasPressedThisFrame)
+            pressed = true;
+        yield return null;
     }
+
+    EndMinigame(false);
+}
+
 
     IEnumerator CameraShake(float duration, float magnitude)
     {
