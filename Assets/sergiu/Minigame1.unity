@@ -438,6 +438,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 197666770}
   m_CullTransparentMesh: 1
+--- !u!1 &411760026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 411760028}
+  - component: {fileID: 411760027}
+  m_Layer: 0
+  m_Name: MinigameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &411760027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411760026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5253826e9bdadff829ab29c7d26d514e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinigameManager
+  minigameType: 0
+  nextScene: Scene2
+  scoreOnSuccess: 100
+  minigamePanel: {fileID: 2124369553}
+  progressText: {fileID: 197666772}
+  livesText: {fileID: 1866332232}
+  feedbackText: {fileID: 1343747796}
+  resultText: {fileID: 594954426}
+  timerText: {fileID: 0}
+  prefabW: {fileID: 7247860557322669044, guid: db034147be4b625c998a5d19e5f5627a, type: 3}
+  prefabA: {fileID: 8575999008640694898, guid: 4ceffe1c1c8b93c9d990e27c30ebf8e1, type: 3}
+  prefabS: {fileID: 1185921515680964127, guid: 5f9a5d48a0f502fcc8004cf528d75a2d, type: 3}
+  prefabD: {fileID: 8628507555947757324, guid: b57fb70017557b866b865c90cc0f505a, type: 3}
+  chaser: {fileID: 0}
+  introPanel: {fileID: 0}
+  introText: {fileID: 0}
+  jumpscarePanel: {fileID: 0}
+  jumpscareText: {fileID: 0}
+  sleepSlider: {fileID: 0}
+  sleepSliderFill: {fileID: 0}
+  sleepOverlay: {fileID: 0}
+  currentKeyText: {fileID: 0}
+  stayAwakeTimerText: {fileID: 0}
+  resultStayAwakeText: {fileID: 0}
+  feedbackStayAwakeText: {fileID: 0}
+--- !u!4 &411760028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 411760026}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.01623, y: -3.24506, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &594954424
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,8 +769,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -432, y: 121.86}
-  m_SizeDelta: {x: 200, y: 57.7219}
+  m_AnchoredPosition: {x: 9.250008, y: -57.347164}
+  m_SizeDelta: {x: 1082.5, y: 416.1361}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1343747796
 MonoBehaviour:
@@ -750,14 +819,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 200
+  m_fontSizeBase: 200
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -789,7 +858,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: -93.336, z: 8.6362915, w: -127.49585}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -940,62 +1009,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!1 &1793784099
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1793784101}
-  - component: {fileID: 1793784100}
-  m_Layer: 0
-  m_Name: MinigameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1793784100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1793784099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5253826e9bdadff829ab29c7d26d514e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MinigameManager
-  minigamePanel: {fileID: 2124369553}
-  progressText: {fileID: 197666772}
-  livesText: {fileID: 1866332232}
-  feedbackText: {fileID: 1343747796}
-  resultText: {fileID: 594954426}
-  prefabW: {fileID: 8575999008640694898, guid: 4ceffe1c1c8b93c9d990e27c30ebf8e1, type: 3}
-  prefabA: {fileID: 1185921515680964127, guid: 5f9a5d48a0f502fcc8004cf528d75a2d, type: 3}
-  prefabS: {fileID: 8628507555947757324, guid: b57fb70017557b866b865c90cc0f505a, type: 3}
-  prefabD: {fileID: 7247860557322669044, guid: db034147be4b625c998a5d19e5f5627a, type: 3}
-  minigameType: 0
-  nextScene: Scene2
-  scoreOnSuccess: 100
---- !u!4 &1793784101
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1793784099}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.30445, y: 5.64906, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1866332230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,7 +1200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1217,7 +1230,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1538097342}
+  - {fileID: 411760028}
   - {fileID: 801556812}
-  - {fileID: 1793784101}
   - {fileID: 94997871}
   - {fileID: 11224510}

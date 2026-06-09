@@ -61,7 +61,7 @@ public class PassingObject : MonoBehaviour
 
 IEnumerator FadeOutAndStop()
 {
-    float fadeDuration = 3f;  // durata fade out in secunde
+    float fadeDuration = 5f;  // durata fade out in secunde
     float startVolume = audioSource.volume;
     float elapsed = 0f;
 

@@ -872,6 +872,72 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1098399301}
   m_CullTransparentMesh: 1
+--- !u!1 &1115040763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1115040765}
+  - component: {fileID: 1115040764}
+  m_Layer: 0
+  m_Name: MinigameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1115040764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115040763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5253826e9bdadff829ab29c7d26d514e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MinigameManager
+  minigameType: 1
+  nextScene: Scene2
+  scoreOnSuccess: 100
+  minigamePanel: {fileID: 0}
+  progressText: {fileID: 0}
+  livesText: {fileID: 0}
+  feedbackText: {fileID: 0}
+  resultText: {fileID: 0}
+  timerText: {fileID: 0}
+  prefabW: {fileID: 0}
+  prefabA: {fileID: 0}
+  prefabS: {fileID: 0}
+  prefabD: {fileID: 0}
+  chaser: {fileID: 1206111508}
+  introPanel: {fileID: 2103604088}
+  introText: {fileID: 1328096922}
+  jumpscarePanel: {fileID: 1098399301}
+  jumpscareText: {fileID: 240889804}
+  sleepSlider: {fileID: 0}
+  sleepSliderFill: {fileID: 0}
+  sleepOverlay: {fileID: 0}
+  currentKeyText: {fileID: 0}
+--- !u!4 &1115040765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115040763}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.81152, y: -3.03722, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1120285079
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,60 +2073,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2055356456
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2055356458}
-  - component: {fileID: 2055356457}
-  m_Layer: 0
-  m_Name: ChaseMinigameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2055356457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2055356456}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c496383086dc97fa9ba66b2f20be3ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChaseMinigameManager
-  chaser: {fileID: 1206111508}
-  introPanel: {fileID: 2103604088}
-  introText: {fileID: 1328096922}
-  introDuration: 3
-  jumpscarePanel: {fileID: 1098399301}
-  jumpscareText: {fileID: 240889804}
-  nextScene: Scene3
-  timerText: {fileID: 0}
-  shakeDuration: 0.5
-  shakeMagnitude: 0.3
---- !u!4 &2055356458
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2055356456}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.58634, y: -2.36697, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2103604088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2234,7 +2246,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2118874986}
-  - {fileID: 2055356458}
   - {fileID: 703897381}
   - {fileID: 936424752}
   - {fileID: 1206111510}
@@ -2248,3 +2259,4 @@ SceneRoots:
   - {fileID: 1815732601}
   - {fileID: 1211771521}
   - {fileID: 1721762095}
+  - {fileID: 1115040765}
