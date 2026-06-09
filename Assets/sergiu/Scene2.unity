@@ -721,8 +721,8 @@ Transform:
   m_GameObject: {fileID: 703897379}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1255, y: -0.0938, z: 0}
-  m_LocalScale: {x: 1.4200642, y: 0.9939, z: 1}
+  m_LocalPosition: {x: -0.0394, y: -0.0919, z: 0}
+  m_LocalScale: {x: 1.4312828, y: 0.9942975, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -902,7 +902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinigameManager
   minigameType: 1
-  nextScene: Scene2
+  nextScene: Minigame2
   scoreOnSuccess: 100
   minigamePanel: {fileID: 0}
   progressText: {fileID: 0}
