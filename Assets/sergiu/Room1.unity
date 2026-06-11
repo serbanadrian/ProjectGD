@@ -473,7 +473,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 160}
+  m_AnchoredPosition: {x: 0, y: 129}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &243090028
@@ -612,7 +612,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -225}
+  m_AnchoredPosition: {x: 13, y: -136}
   m_SizeDelta: {x: 800, y: -300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &255931585
@@ -716,6 +716,7 @@ GameObject:
   m_Component:
   - component: {fileID: 538265470}
   - component: {fileID: 538265469}
+  - component: {fileID: 538265471}
   m_Layer: 0
   m_Name: biciclist_1
   m_TagString: Untagged
@@ -770,7 +771,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 5342356679773076631, guid: 4a38d25532af8be2eb95528681a244df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -791,12 +792,31 @@ Transform:
   m_GameObject: {fileID: 538265468}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.5, y: -4.87, z: 0}
+  m_LocalPosition: {x: 9.34, y: -5.02, z: 0}
   m_LocalScale: {x: 0.6192, y: 0.7124, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &538265471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538265468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37166229985399f2786d157095259327, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PassingObject
+  speed: 3
+  startDelay: 2
+  startX: -11
+  endX: 12
+  positionY: -5
+  music: {fileID: 8300000, guid: 98f185fc431be3bccba40299d4af81b5, type: 3}
+  musicVolume: 4
 --- !u!1 &1116266593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,8 +1132,8 @@ Transform:
   m_GameObject: {fileID: 1437004460}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0874, y: -0.025, z: 0}
-  m_LocalScale: {x: 0.91078955, y: 0.34335738, z: 1}
+  m_LocalPosition: {x: 0.0037, y: -0.0168, z: 0}
+  m_LocalScale: {x: 1.0902833, y: 0.34380367, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1152,7 +1172,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 63.7, y: 25}
+  m_AnchoredPosition: {x: 197.3, y: 17.7}
   m_SizeDelta: {x: -40, y: -50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1648069905

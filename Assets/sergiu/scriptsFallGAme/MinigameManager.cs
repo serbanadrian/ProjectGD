@@ -2,23 +2,11 @@ using UnityEngine;
 using TMPro;
 using System;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MinigameManager : MonoBehaviour
 {
     public static MinigameManager Instance { get; private set; }
-
-    [Header("UI References")]
-    public GameObject minigamePanel;
-    public TMP_Text progressText;
-    public TMP_Text livesText;
-    public TMP_Text feedbackText;
-    public TMP_Text resultText;
-
-    [Header("Falling Object Prefabs")]
-    public GameObject prefabW;   // imaginea pentru W
-    public GameObject prefabA;   // imaginea pentru A
-    public GameObject prefabS;   // imaginea pentru S
-    public GameObject prefabD;   // imaginea pentru D
 
     [Header("Settings")]
     public MinigameType minigameType = MinigameType.Mash;
@@ -29,6 +17,42 @@ public class MinigameManager : MonoBehaviour
     private bool isPlaying = false;
     private PlayerMovement playerMovement;
 
+    [Header("UI References")]
+    public GameObject minigamePanel;
+    public TMP_Text progressText;
+    public TMP_Text livesText;
+    public TMP_Text feedbackText;
+    public TMP_Text resultText;
+    public TMP_Text timerText;
+
+    [Header("Falling Object Prefabs")]
+    public GameObject prefabW;
+    public GameObject prefabA;
+    public GameObject prefabS;
+    public GameObject prefabD;
+
+    [Header("Chase Settings")]
+    public GameObject chaser;
+
+    [Header("Chase UI")]
+    public GameObject introPanel;
+    public TMP_Text introText;
+    public GameObject jumpscarePanel;
+    public TMP_Text jumpscareText;
+    
+    [Header("Chase Audio")]
+public AudioClip chaseMusic;        // muzica de urmarire (loop)
+public AudioClip caughtSound;       // sunetul de prins
+
+    [Header("StayAwake Settings")]
+    public Slider sleepSlider;
+    public Image sleepSliderFill;
+    public Image sleepOverlay;
+    public TMP_Text currentKeyText;
+    public TMP_Text stayAwakeTimerText;
+    public TMP_Text resultStayAwakeText;
+    public TMP_Text feedbackStayAwakeText;
+
     void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
@@ -38,16 +62,23 @@ public class MinigameManager : MonoBehaviour
     void Start()
     {
         playerMovement = FindFirstObjectByType<PlayerMovement>();
-        minigamePanel.SetActive(false);
+
+        // ← null checks peste tot
+        if (minigamePanel != null) minigamePanel.SetActive(false);
+        if (introPanel != null)    introPanel.SetActive(false);
+        if (jumpscarePanel != null) jumpscarePanel.SetActive(false);
+        if (sleepOverlay != null)  sleepOverlay.color = new Color(0f, 0f, 0f, 0f);
+
         StartMinigame(OnMinigameComplete);
     }
 
     void OnMinigameComplete(bool success)
     {
-        if (success)
-            GameManager.Instance.AddScore(scoreOnSuccess);
-        else
-            GameManager.Instance.LoseLife();
+        if (GameManager.Instance != null)
+        {
+            if (success) GameManager.Instance.AddScore(scoreOnSuccess);
+            else GameManager.Instance.LoseLife();
+        }
     }
 
     public void StartMinigame(Action<bool> onComplete)
@@ -57,9 +88,11 @@ public class MinigameManager : MonoBehaviour
         playerMovement = FindFirstObjectByType<PlayerMovement>();
         isPlaying = true;
 
-        minigamePanel.SetActive(true);
-        resultText.text   = "";
-        feedbackText.text = "";
+        if (minigamePanel != null)  minigamePanel.SetActive(true);
+        if (resultText != null)     resultText.text    = "";
+        if (feedbackText != null)   feedbackText.text  = "";
+        if (currentKeyText != null) currentKeyText.text = "";
+        if (timerText != null)      timerText.text     = "";
 
         if (playerMovement != null) playerMovement.enabled = false;
 
@@ -77,20 +110,31 @@ public class MinigameManager : MonoBehaviour
         currentMinigame?.UpdateMinigame();
     }
 
-    void OnMinigameFinished(bool success)
+   void OnMinigameFinished(bool success)
+{
+    isPlaying = false;
+
+    if (currentKeyText != null) currentKeyText.text = "";
+    if (stayAwakeTimerText != null) stayAwakeTimerText.text = "";
+
+    TMP_Text targetResult = minigameType == MinigameType.StayAwake
+        ? resultStayAwakeText
+        : resultText;
+
+    if (targetResult != null)
     {
-        isPlaying = false;
-        resultText.text  = success ? "SUCCES!" : "ESUAT!";
-        resultText.color = success ? Color.green : Color.red;
-
-        if (playerMovement != null) playerMovement.enabled = true;
-
-        Invoke(nameof(GoToNextScene), 2f);
+        targetResult.text  = success ? "SUCCES!" : "ESUAT!";
+        targetResult.color = success ? Color.green : Color.red;
     }
+
+    if (playerMovement != null) playerMovement.enabled = true;
+
+    Invoke(nameof(GoToNextScene), 2f);
+}
 
     void GoToNextScene()
     {
-        minigamePanel.SetActive(false);
+        if (minigamePanel != null) minigamePanel.SetActive(false);
 
         if (GameManager.Instance != null)
             GameManager.Instance.GoToScene(nextScene);
@@ -118,22 +162,26 @@ public class MinigameManager : MonoBehaviour
     }
 
     public void ShowFeedback(bool correct)
-    {
-        StartCoroutine(FeedbackFlash(correct));
-    }
+{
+    StartCoroutine(FeedbackFlash(correct));
+}
 
-    IEnumerator FeedbackFlash(bool correct)
-    {
-        if (feedbackText != null)
-        {
-            feedbackText.text  = correct ? "✓" : "✗";
-            feedbackText.color = correct ? Color.green : Color.red;
-            yield return new WaitForSeconds(0.3f);
-            feedbackText.text = "";
-        }
-    }
+IEnumerator FeedbackFlash(bool correct)
+{
+    TMP_Text target = minigameType == MinigameType.StayAwake 
+        ? feedbackStayAwakeText 
+        : feedbackText;
 
-    // Spawneaza prefab-ul corespunzator tipului
+    if (target != null)
+    {
+        target.text  = correct ? "✓" : "✗";
+        target.color = correct ? Color.green : Color.red;
+        yield return new WaitForSeconds(0.3f);
+        target.text = "";
+    }
+}
+
+
     public GameObject SpawnFallingObject(FallingObject.ObjectType type, Vector3 position)
     {
         GameObject prefab = type switch
@@ -160,4 +208,95 @@ public class MinigameManager : MonoBehaviour
     {
         return (this as MonoBehaviour).StartCoroutine(routine);
     }
+
+    public void UpdateSleepBar(float value)
+    {
+        if (sleepSlider != null)
+            sleepSlider.value = value;
+
+        if (sleepSliderFill != null)
+            sleepSliderFill.color = Color.Lerp(Color.green, Color.red, value);
+    }
+
+    public void UpdateOverlay(float value)
+    {
+        if (sleepOverlay != null)
+            sleepOverlay.color = new Color(0f, 0f, 0f, value * 0.85f);
+    }
+
+    public void ShowCurrentKey(string key)
+    {
+        if (currentKeyText != null)
+            currentKeyText.text = $"Apasă [ {key} ]";
+    }
+
+    public void ShowIntro(string message, float duration)
+    {
+        StartCoroutine(IntroCoroutine(message, duration));
+    }
+
+    IEnumerator IntroCoroutine(string message, float duration)
+    {
+        if (introPanel != null && introText != null)
+        {
+            introPanel.SetActive(true);
+            introText.text = message;
+            yield return new WaitForSeconds(duration);
+            introPanel.SetActive(false);
+        }
+    }
+
+    public void ShowJumpscare(string message)
+    {
+        if (jumpscarePanel != null)
+        {
+            jumpscarePanel.SetActive(true);
+            if (jumpscareText != null)
+                jumpscareText.text = message;
+        }
+    }
+    private AudioSource audioSource;
+
+public void PlayChaseMusic()
+{
+    if (audioSource == null)
+        audioSource = gameObject.AddComponent<AudioSource>();
+
+    if (chaseMusic != null)
+    {
+        audioSource.clip = chaseMusic;
+        audioSource.loop = true;
+        audioSource.Play();
+    }
+}
+
+public void PlayCaughtSound()
+{
+    if (audioSource == null)
+        audioSource = gameObject.AddComponent<AudioSource>();
+
+    // Opreste muzica de urmarire
+    audioSource.Stop();
+    audioSource.loop = false;
+
+    if (caughtSound != null)
+    {
+        audioSource.clip = caughtSound;
+        audioSource.Play();
+    }
+}
+
+  public void UpdateTimer(float timeRemaining)
+{
+    if (minigameType == MinigameType.StayAwake)
+    {
+        if (stayAwakeTimerText != null)
+            stayAwakeTimerText.text = $"Timp: {timeRemaining:F0}s";
+    }
+    else
+    {
+        if (timerText != null)
+            timerText.text = $"Timp: {timeRemaining:F0}s";
+    }
+}
 }

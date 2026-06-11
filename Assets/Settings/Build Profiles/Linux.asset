@@ -29,6 +29,12 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/sergiu/Minigame1.unity
     m_guid: 2ec4df2130bf26be684dc0a2a10cffd6
+  - m_enabled: 1
+    m_path: Assets/sergiu/Scene2.unity
+    m_guid: 4c8c351a65023036482811da6a69a9be
+  - m_enabled: 1
+    m_path: Assets/sergiu/Minigame2.unity
+    m_guid: 81acc6c14aa73beaca64f4a680ec5b45
   m_HasScriptingDefines: 0
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
