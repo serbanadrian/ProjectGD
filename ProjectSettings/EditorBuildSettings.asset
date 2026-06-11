@@ -32,5 +32,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Hol4.unity
     guid: 650a82af235c6464491234d1662d988e
+  - enabled: 1
+    path: Assets/Scenes/Test2.unity
+    guid: ebe518bb56cb6774eb9c1578af6ea722
+  - enabled: 1
+    path: Assets/sergiu/Minigame2.unity
+    guid: 81acc6c14aa73beaca64f4a680ec5b45
+  - enabled: 1
+    path: Assets/Scenes/Hol5.unity
+    guid: bec51a5ed93836d4ea8516854595f00f
+  - enabled: 1
+    path: Assets/sergiu/Scene2.unity
+    guid: 4c8c351a65023036482811da6a69a9be
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

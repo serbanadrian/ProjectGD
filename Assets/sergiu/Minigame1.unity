@@ -709,7 +709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinigameManager
   minigameType: 0
-  nextScene: Scene2
+  nextScene: Hol3
   scoreOnSuccess: 100
   minigamePanel: {fileID: 2124369553}
   progressText: {fileID: 197666772}
@@ -726,6 +726,8 @@ MonoBehaviour:
   introText: {fileID: 0}
   jumpscarePanel: {fileID: 0}
   jumpscareText: {fileID: 0}
+  chaseMusic: {fileID: 0}
+  caughtSound: {fileID: 0}
   sleepSlider: {fileID: 0}
   sleepSliderFill: {fileID: 0}
   sleepOverlay: {fileID: 0}
