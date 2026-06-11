@@ -1996,7 +1996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinigameManager
   minigameType: 2
-  nextScene: Hol4
+  nextScene: Hol5
   scoreOnSuccess: 100
   minigamePanel: {fileID: 1200738496}
   progressText: {fileID: 0}
