@@ -14,7 +14,7 @@ TagManager:
   - Player
   - Object
   - Background
-  - 
+  - Bull
   - 
   - 
   - 
@@ -38,8 +38,26 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: background
+    uniqueID: 3005821489
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: overlay
+    uniqueID: 3454495119
+    locked: 0
+  - name: visible
+    uniqueID: 4024071145
+    locked: 0
+  - name: player
+    uniqueID: 3693621611
+    locked: 0
+  - name: table
+    uniqueID: 3084839341
+    locked: 0
+  - name: on table
+    uniqueID: 342826641
     locked: 0
   m_RenderingLayers:
   - Default
