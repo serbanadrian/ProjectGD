@@ -6,14 +6,22 @@ public class ArduinoBoardManager : MonoBehaviour
     [Header("Board Slots")]
     public List<BoardSlot> slots = new List<BoardSlot>();
 
-    [Header("Code State")]
-    public int codeState = 0;
-
     [Header("Circuit State")]
     public bool circuitStarted = false;
 
     [Header("Alarm Sequence")]
     public AlarmSequenceManager alarmSequenceManager;
+
+    [Header("Visual Debug - Placed Components")]
+    public bool arduinoPlaced;
+    public bool buttonPlaced;
+    public bool relayPlaced;
+    public bool switchPlaced;
+    public bool multiplexerPlaced;
+    public bool wiresPlaced;
+    public bool codePlaced;
+    public bool allComponentsPlaced;
+    public bool allReadyToStart;
 
     private readonly ItemType[] placementPriority =
     {
@@ -22,13 +30,25 @@ public class ArduinoBoardManager : MonoBehaviour
         ItemType.Relay,
         ItemType.Switch,
         ItemType.Multiplexer,
-        ItemType.Wires
+        ItemType.Wires,
+        ItemType.Code
     };
+
+    private void Update()
+    {
+        UpdateVisualDebug();
+    }
 
     public void InteractWithBoard(PlayerInventory inventory)
     {
         if (inventory == null)
             return;
+
+        if (circuitStarted)
+        {
+            Debug.Log("Circuitul este deja pornit.");
+            return;
+        }
 
         if (CanStartCircuit())
         {
@@ -57,33 +77,29 @@ public class ArduinoBoardManager : MonoBehaviour
                 IBoardCommand placeCommand = new PlaceComponentCommand(slot, inventory);
                 placeCommand.Execute();
 
-                Debug.Log("Componenta montata pe board: " + item);
+                UpdateVisualDebug();
                 return;
             }
         }
 
-        Debug.Log("Nu ai componente valide de montat pe board.");
-    }
-
-    public void ReceiveCodeFromRobot(int newCodeState)
-    {
-        codeState = newCodeState;
-        Debug.Log("Board-ul a primit cod. Code state = " + codeState);
+        DebugMissingRequirements();
     }
 
     public bool HasAllComponentsPlaced()
     {
-        return IsPlaced(ItemType.Arduino)
-            && IsPlaced(ItemType.Button)
-            && IsPlaced(ItemType.Relay)
-            && IsPlaced(ItemType.Switch)
-            && IsPlaced(ItemType.Multiplexer)
-            && IsPlaced(ItemType.Wires);
+        foreach (ItemType item in placementPriority)
+        {
+            if (!IsPlaced(item))
+                return false;
+        }
+
+        return true;
     }
 
     public bool CanStartCircuit()
     {
-        return codeState != 0 && HasAllComponentsPlaced() && !circuitStarted;
+        UpdateVisualDebug();
+        return allComponentsPlaced && !circuitStarted;
     }
 
     public void StartCircuit()
@@ -93,53 +109,50 @@ public class ArduinoBoardManager : MonoBehaviour
 
         if (!CanStartCircuit())
         {
-            Debug.Log("Circuitul nu poate porni. Lipseste codul sau componentele.");
+            Debug.LogWarning("Circuitul NU poate porni.");
+            DebugMissingRequirements();
             return;
         }
 
         circuitStarted = true;
+        UpdateVisualDebug();
 
-        Debug.Log("Circuit pornit! Code state: " + codeState);
+        Debug.Log("START CIRCUIT");
 
         if (alarmSequenceManager != null)
         {
+            Debug.Log("START ALARM SEQUENCE");
             alarmSequenceManager.StartAlarmSequence();
         }
         else
         {
-            Debug.LogWarning("AlarmSequenceManager nu este conectat la ArduinoBoardManager.");
+            Debug.LogError("AlarmSequenceManager este NULL pe ArduinoBoardManager.");
         }
     }
 
     public string GetInteractionMessage(PlayerInventory inventory)
     {
+        UpdateVisualDebug();
+
+        if (circuitStarted)
+            return "Circuitul este deja pornit";
+
         if (CanStartCircuit())
-        {
             return "Apasa E ca sa pornesti alarma";
-        }
 
         if (inventory == null)
-        {
             return "Inventarul nu este gasit";
-        }
 
         foreach (ItemType item in placementPriority)
         {
             if (inventory.HasItem(item) && !IsPlaced(item))
-            {
                 return "Apasa E ca sa plasezi: " + item;
-            }
         }
 
-        if (codeState == 0)
-        {
-            return "Board-ul are nevoie de cod";
-        }
+        ItemType? missingItem = GetFirstMissingComponent();
 
-        if (!HasAllComponentsPlaced())
-        {
-            return "Board-ul are nevoie de toate componentele";
-        }
+        if (missingItem.HasValue)
+            return "Lipseste componenta: " + missingItem.Value;
 
         return "Circuitul nu poate fi pornit";
     }
@@ -154,10 +167,61 @@ public class ArduinoBoardManager : MonoBehaviour
     {
         foreach (BoardSlot slot in slots)
         {
-            if (slot.itemType == item)
+            if (slot != null && slot.itemType == item)
                 return slot;
         }
 
         return null;
+    }
+
+    private ItemType? GetFirstMissingComponent()
+    {
+        foreach (ItemType item in placementPriority)
+        {
+            if (!IsPlaced(item))
+                return item;
+        }
+
+        return null;
+    }
+
+    private void UpdateVisualDebug()
+    {
+        arduinoPlaced = IsPlaced(ItemType.Arduino);
+        buttonPlaced = IsPlaced(ItemType.Button);
+        relayPlaced = IsPlaced(ItemType.Relay);
+        switchPlaced = IsPlaced(ItemType.Switch);
+        multiplexerPlaced = IsPlaced(ItemType.Multiplexer);
+        wiresPlaced = IsPlaced(ItemType.Wires);
+        codePlaced = IsPlaced(ItemType.Code);
+
+        allComponentsPlaced =
+            arduinoPlaced &&
+            buttonPlaced &&
+            relayPlaced &&
+            switchPlaced &&
+            multiplexerPlaced &&
+            wiresPlaced &&
+            codePlaced;
+
+        allReadyToStart = allComponentsPlaced && !circuitStarted;
+    }
+
+    private void DebugMissingRequirements()
+    {
+        UpdateVisualDebug();
+
+        Debug.Log("===== BOARD DEBUG =====");
+        Debug.Log("Arduino = " + arduinoPlaced);
+        Debug.Log("Button = " + buttonPlaced);
+        Debug.Log("Relay = " + relayPlaced);
+        Debug.Log("Switch = " + switchPlaced);
+        Debug.Log("Multiplexer = " + multiplexerPlaced);
+        Debug.Log("Wires = " + wiresPlaced);
+        Debug.Log("Code = " + codePlaced);
+        Debug.Log("All Components Placed = " + allComponentsPlaced);
+        Debug.Log("Circuit Started = " + circuitStarted);
+        Debug.Log("All Ready To Start = " + allReadyToStart);
+        Debug.Log("=======================");
     }
 }

@@ -11,32 +11,37 @@ public class ProfessorManager : MonoBehaviour
     [Header("Animations")]
     public string noticeAlarmAnim = "notice_alarm";
     public string walkNorthAnim = "walk_north";
-    public string walkRightAnim = "walk_west";
+    public string walkRightAnim = "walk_east";
     public string idleNorthAnim = "idle_north";
-    public string noticeBullAnim = "bull_incoming";
+    public string noticeBullAnim = "notice_bull";
 
     [Header("Timing")]
     public float noticeAlarmDuration = 1f;
 
-    private GameObject professorPrefab;
-    private Transform professorSpawnPoint;
+    private Animator animator;
+    private bool alarmRoutineStarted = false;
 
-    private GameObject currentProfessor;
-    private Animator professorAnimator;
-
-    public void InitializeProfessor(GameObject prefab, Transform spawnPoint)
+    private void Awake()
     {
-        professorPrefab = prefab;
-        professorSpawnPoint = spawnPoint;
+        animator = GetComponent<Animator>();
     }
 
-    public IEnumerator StartProfessorAlarmSequence()
+    private void Start()
     {
-        SpawnProfessor();
+        StartAlarmRoutine();
+    }
 
-        if (currentProfessor == null)
-            yield break;
+    public void StartAlarmRoutine()
+    {
+        if (alarmRoutineStarted)
+            return;
 
+        alarmRoutineStarted = true;
+        StartCoroutine(ProfessorAlarmRoutine());
+    }
+
+    private IEnumerator ProfessorAlarmRoutine()
+    {
         PlayAnimation(noticeAlarmAnim);
 
         yield return new WaitForSeconds(noticeAlarmDuration);
@@ -50,62 +55,45 @@ public class ProfessorManager : MonoBehaviour
         PlayAnimation(idleNorthAnim);
     }
 
-    public void InitializeProfessor(GameObject professor)
-    {
-        currentProfessor = professor;
-
-        if (currentProfessor != null)
-        {
-            professorAnimator = currentProfessor.GetComponent<Animator>();
-        }
-    }
-
-    private void SpawnProfessor()
-    {
-        if (currentProfessor != null)
-            return;
-
-        if (professorPrefab == null)
-        {
-            Debug.LogWarning("Professor Prefab lipseste in AlarmSequenceManager.");
-            return;
-        }
-
-        if (professorSpawnPoint == null)
-        {
-            Debug.LogWarning("Professor Spawn Point lipseste in AlarmSequenceManager.");
-            return;
-        }
-
-        currentProfessor = Instantiate(
-            professorPrefab,
-            professorSpawnPoint.position,
-            professorSpawnPoint.rotation
-        );
-
-        professorAnimator = currentProfessor.GetComponent<Animator>();
-
-        if (professorAnimator == null)
-        {
-            Debug.LogWarning("Profesorul spawnat nu are Animator.");
-        }
-    }
-
     private IEnumerator MoveForTime(Vector2 direction, float duration)
     {
         float timer = 0f;
 
         while (timer < duration)
         {
-            if (currentProfessor == null)
-                yield break;
-
-            currentProfessor.transform.position +=
+            transform.position +=
                 (Vector3)(direction.normalized * moveSpeed * Time.deltaTime);
 
             timer += Time.deltaTime;
             yield return null;
         }
+    }
+
+
+    public void ThrowAway()
+    {
+        StartCoroutine(ThrowAwayRoutine());
+    }
+
+    private IEnumerator ThrowAwayRoutine()
+    {
+        float duration = 1.2f;
+        float timer = 0f;
+
+        Vector3 direction = new Vector3(1f, 1f, 0f).normalized;
+        float throwSpeed = 5f;
+        float spinSpeed = 720f;
+
+        while (timer < duration)
+        {
+            transform.position += direction * throwSpeed * Time.deltaTime;
+            transform.Rotate(0f, 0f, -spinSpeed * Time.deltaTime);
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        gameObject.SetActive(false);
     }
 
     public void PlayNoticeBull()
@@ -115,17 +103,24 @@ public class ProfessorManager : MonoBehaviour
 
     public void HideProfessor()
     {
-        if (currentProfessor != null)
-        {
-            currentProfessor.SetActive(false);
-        }
+        gameObject.SetActive(false);
     }
 
     private void PlayAnimation(string animationName)
     {
-        if (professorAnimator != null && !string.IsNullOrEmpty(animationName))
+        if (animator == null)
         {
-            professorAnimator.Play(animationName);
+            Debug.LogWarning("Profesorul nu are Animator.");
+            return;
         }
+
+        if (string.IsNullOrEmpty(animationName))
+        {
+            Debug.LogWarning("Numele animatiei profesorului este gol.");
+            return;
+        }
+
+        Debug.Log("Profesor play: " + animationName);
+        animator.Play(animationName, 0, 0f);
     }
 }

@@ -21,13 +21,11 @@ public class RobotManager : MonoBehaviour
     [Header("Code Writing")]
     public float helpBuildCodeDuration = 2f;
     public bool codeAlreadyWritten = false;
+    public bool codeReadyToCollect = false;
 
     [Header("Robot State")]
     public bool willingToHelp = false;
     public bool isAtLaptop = false;
-
-    [Header("References")]
-    public ArduinoBoardManager boardManager;
 
     private Animator animator;
     private bool isAwake = false;
@@ -52,11 +50,14 @@ public class RobotManager : MonoBehaviour
         if (isWritingCode)
             return "Robotul scrie codul...";
 
+        if (codeReadyToCollect)
+            return "Apasa E ca sa colectezi codul";
+
         if (isAtLaptop && willingToHelp && !codeAlreadyWritten)
             return "Robotul e pregatit sa scrie codul";
 
         if (isAtLaptop && willingToHelp && codeAlreadyWritten)
-            return "Codul a fost deja scris";
+            return "Codul a fost deja colectat";
 
         if (isAtLaptop && !willingToHelp)
             return "Robotul e la laptop, dar nu vrea sa ajute";
@@ -69,10 +70,17 @@ public class RobotManager : MonoBehaviour
 
     public void Interact(PlayerInventory inventory)
     {
-        if (!CanWakeUp(inventory))
+        if (CanWakeUp(inventory))
+        {
+            StartCoroutine(WakeUpAndMoveToLaptop());
             return;
+        }
 
-        StartCoroutine(WakeUpAndMoveToLaptop());
+        if (codeReadyToCollect)
+        {
+            CollectCode(inventory);
+            return;
+        }
     }
 
     private IEnumerator WakeUpAndMoveToLaptop()
@@ -136,20 +144,11 @@ public class RobotManager : MonoBehaviour
         codeAlreadyWritten = true;
 
         if (animator != null)
-        {
             animator.SetBool(helpBuildCodeParameter, true);
-        }
 
         yield return new WaitForSeconds(helpBuildCodeDuration);
 
-        if (boardManager != null)
-        {
-            boardManager.ReceiveCodeFromRobot(1);
-        }
-        else
-        {
-            Debug.LogWarning("RobotManager nu are BoardManager conectat.");
-        }
+        codeReadyToCollect = true;
 
         if (animator != null)
         {
@@ -158,6 +157,17 @@ public class RobotManager : MonoBehaviour
         }
 
         isWritingCode = false;
+    }
+
+    public void CollectCode(PlayerInventory inventory)
+    {
+        if (!codeReadyToCollect || inventory == null)
+            return;
+
+        inventory.AddItem(ItemType.Code);
+        codeReadyToCollect = false;
+
+        Debug.Log("Codul a fost colectat in inventar.");
     }
 
     public bool CanWriteCode()

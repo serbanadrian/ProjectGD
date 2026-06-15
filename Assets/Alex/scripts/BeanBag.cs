@@ -29,6 +29,9 @@ public class BeanBag : MonoBehaviour
         if (!robotManager.willingToHelp)
             return "Don't know how to write code";
 
+        if (robotManager.codeReadyToCollect)
+            return "Codul este gata. Mergi la robot si apasa E";
+
         return "Robot is willing to help. Apasa E ca sa scrie codul";
     }
 
@@ -40,14 +43,10 @@ public class BeanBag : MonoBehaviour
         playerIsSitting = !playerIsSitting;
 
         if (playerAnimator != null)
-        {
             playerAnimator.SetBool(sittingParameter, playerIsSitting);
-        }
 
         if (interactionUI != null)
-        {
             interactionUI.ShowMessage(GetInteractionMessage());
-        }
     }
 
     public void ForceStand(Animator playerAnimator)
@@ -55,9 +54,7 @@ public class BeanBag : MonoBehaviour
         playerIsSitting = false;
 
         if (playerAnimator != null)
-        {
             playerAnimator.SetBool(sittingParameter, false);
-        }
     }
 
     public void TryAskRobotForCode()
@@ -85,7 +82,7 @@ public class BeanBag : MonoBehaviour
 
         robotManager.HelpBuildCode();
 
-        interactionUI.ShowMessage("Codul a fost scris si trimis catre Arduino");
+        interactionUI.ShowMessage("Robotul scrie codul...");
     }
 
     private void OnTriggerEnter2D(Collider2D other)

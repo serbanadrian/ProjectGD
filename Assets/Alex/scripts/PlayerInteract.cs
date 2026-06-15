@@ -8,6 +8,8 @@ public class PlayerInteract : MonoBehaviour
     private RobotManager currentRobot;
     private BeanBag currentBeanBag;
     private RobotDogManager currentDog;
+    private bool isThreateningDog = false;
+    private bool alreadyThreatenedDog = false;
 
     private PlayerInventory inventory;
     private Animator animator;
@@ -62,15 +64,24 @@ public class PlayerInteract : MonoBehaviour
         if (currentDog == null)
             return;
 
-        if (animator != null)
-        {
-            if (threatenCoroutine != null)
-                StopCoroutine(threatenCoroutine);
+        if (animator == null)
+            return;
 
-            threatenCoroutine = StartCoroutine(ThreatenRoutine());
+        if (!isThreateningDog)
+        {
+            isThreateningDog = true;
+            alreadyThreatenedDog = true;
+
+            animator.SetBool("ThreateningDog", true);
+
+            currentDog.ThreatenDog();
+            UpdateMessage();
+            return;
         }
 
-        currentDog.ThreatenDog();
+        isThreateningDog = false;
+        animator.SetBool("ThreateningDog", false);
+
         UpdateMessage();
     }
 

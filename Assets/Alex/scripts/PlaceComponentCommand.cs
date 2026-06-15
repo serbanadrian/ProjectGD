@@ -16,6 +16,14 @@ public class PlaceComponentCommand : IBoardCommand
         if (slot == null || inventory == null)
             return;
 
+        if (slot.itemType == ItemType.Code)
+        {
+            slot.isPlaced = true;
+            inventory.RemoveItem(ItemType.Code);
+            Debug.Log("Codul a fost incarcat pe Arduino.");
+            return;
+        }
+
         if (slot.prefab != null && slot.spawnPoint != null)
         {
             GameObject obj = Object.Instantiate(
@@ -30,7 +38,7 @@ public class PlaceComponentCommand : IBoardCommand
 
             foreach (SpriteRenderer sr in renderers)
             {
-                sr.sortingLayerName = "table";
+                sr.sortingLayerName = "visible";
                 sr.sortingOrder = 20;
             }
         }
